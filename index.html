@@ -5,20 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shielded Hope Initiative</title>
   <style>
-    :root {
-      font-size: 1em; /* base font size */
-      line-height: 1.5; /* vertical rhythm baseline */
-    }
+/* Minimal CSS Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #ffffff;
-      color: #111;
-      text-align: left;
-      margin: 0;
-      padding: 0 1.25em;
-      line-height: 1.5em;
-    }
+body {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 1.5em;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2em;
+  line-height: 1.5;
+  margin-bottom: 0.75em;
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin-bottom: 0.75em;
+}
+
+h3 {
+  font-size: 1.25em;
+  line-height: 1.2;
+  margin-bottom: 1.2em;
+}
+
+h4 {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 1.5em;
+}
 
     header {
       padding: 2.5em 1.25em 1.25em;
@@ -31,11 +67,7 @@
       height: auto;
     }
 
-    h1 {
-      font-size: 2em;
-      margin-top: 1em;
-      margin-bottom: 0.5em;
-    }
+    
 
     .tagline {
       font-style: italic;
@@ -57,17 +89,7 @@
       word-break: break-word;
     }
 
-    h2 {
-      font-size: 1.5em;
-      margin-bottom: 0.5em;
-      margin-top: 0;
-    }
-
-    h3 {
-      font-size: 1.25em;
-      margin-bottom: 0.5em;
-      margin-top: 1.5em;
-    }
+    
 
     footer {
       margin-top: 3.75em;
