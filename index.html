@@ -95,7 +95,7 @@ h4 {
       word-break: break-word;
     }
 
-.quiz {
+    .quiz {
       margin-top: 2em;
     }
 
@@ -104,10 +104,16 @@ h4 {
       margin-bottom: 1.5em;
     }
 
+    .question-number {
+      font-weight: 600;
+      margin-bottom: 0.5em;
+      color: #555;
+    }
+
     .buttons {
       display: flex;
       gap: 1em;
-      margin-bottom: 3em;
+      margin-bottom: 1em;
     }
 
     button {
@@ -116,9 +122,21 @@ h4 {
       cursor: pointer;
     }
 
+    .tip {
+      background: #eef6ff;
+      border-left: 4px solid #09f;
+      padding: 1em;
+      margin-bottom: 2em;
+      font-size: 1em;
+      line-height: 1.4;
+      color: #004080;
+    }
+
     .result {
       font-size: 1.125em;
       margin-top: 2em;
+      font-weight: 600;
+      color: #111;
     }
   </style>
 </head>
@@ -148,17 +166,19 @@ h4 {
   <section class="quiz">
     <h2>Am I Being Controlled?</h2>
     <p>This private, simple tool may help you recognize patterns of emotional abuse or coercive control. Nothing gets stored anywhere. Your responses are and will remain private to you.</p>
+       <div class="question-number" id="question-number"></div>
     <p class="question" id="question"></p>
     <div class="buttons">
       <button onclick="answer(true)">Yes</button>
       <button onclick="answer(false)">No</button>
     </div>
+    <div class="tip" id="tip" style="display:none;"></div>
     <div class="result" id="result"></div>
   </section>
 
   
 
-  <script>
+  <>
     const questions = [
       "They read my texts, emails, or DMs without permission.",
       "They demand to know who I talk to and where I go.",
@@ -197,7 +217,7 @@ h4 {
     }
 
     showQuestion();
-  </script>
+  </script
 
 
   <section>
@@ -452,6 +472,90 @@ h4 {
     <p><a href="https://x.com/shieldedhope4u">X</a> | <a href="https://www.instagram.com/shieldedhopeinitiative">instagram</a> | <a href="https://www.linkedin.com/company/shieldedhopeinitiative/">LinkedIn</a></p>
   </p>
   </footer>
+  <script>
+    const questions = [
+      "They read my texts, emails, or DMs without permission.",
+      "They demand to know who I talk to and where I go.",
+      "They control the money or make me ask for it.",
+      "I feel afraid to disagree with them.",
+      "They insult or criticize me, then say it's 'just a joke.'",
+      "They’ve isolated me from friends or family.",
+      "They say I can’t survive without them.",
+      "They threaten to hurt themselves if I leave.",
+      "I find myself constantly trying to keep the peace.",
+      "I’m not sure what’s real anymore after arguments."
+    ];
 
+    const tips = [
+      "Your messages are private. Consider using a secret email or private messaging app on a device they don’t control.",
+      "You deserve privacy. It’s okay to keep some things to yourself. Maybe practice gentle ways to set boundaries.",
+      "Financial control is a common form of abuse. Seek out community resources that can help you with independent financial support.",
+      "Your opinions matter. It’s okay to express how you feel. You might try small steps to build confidence or talk to a trusted friend.",
+      "Emotional abuse can hide behind jokes. Keep track of how you feel; your feelings are valid and important.",
+      "Isolation hurts. Try to keep contact with at least one trusted person, even if just online or by text.",
+      "You are strong and capable on your own. Many survivors find strength through support groups or counseling.",
+      "This is emotional manipulation, not your responsibility. Reach out to professionals who can help both you and them safely.",
+      "Walking on eggshells is exhausting. It’s okay to prioritize your safety and well-being above keeping peace at all costs.",
+      "Gaslighting is a form of abuse. If you feel confused or doubting yourself often, talking to someone outside the relationship can help."
+    ];
+
+    let index = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const tipEl = document.getElementById("tip");
+    const resultEl = document.getElementById("result");
+    const questionNumberEl = document.getElementById("question-number");
+    const buttonsEl = document.querySelector(".buttons");
+
+    function showQuestion() {
+      if (index < questions.length) {
+        questionNumberEl.textContent = `Question ${index + 1} of ${questions.length}`;
+        questionEl.textContent = questions[index];
+        tipEl.style.display = "none";
+        tipEl.textContent = "";
+        resultEl.textContent = "";
+        buttonsEl.style.display = "flex";
+      } else {
+        questionNumberEl.textContent = "";
+        questionEl.textContent = "";
+        buttonsEl.style.display = "none";
+        tipEl.style.display = "none";
+
+        if (score > 3) {
+          resultEl.innerHTML =
+            "<strong>Your answers suggest patterns of control or emotional abuse. You are not alone. Support is available, and you deserve to feel safe.</strong>";
+        } else {
+          resultEl.innerHTML =
+            "<strong>Even one 'yes' can be a sign of unhealthy control. Trust your feelings and reach out if something feels wrong.</strong>";
+        }
+      }
+    }
+
+    function answer(yes) {
+      if (yes) {
+        score++;
+        tipEl.textContent = tips[index];
+        tipEl.style.display = "block";
+      } else {
+        tipEl.style.display = "none";
+        tipEl.textContent = "";
+      }
+      index++;
+      if (index < questions.length) {
+        // Wait 2.5 seconds showing the tip before next question
+        setTimeout(showQuestion, 2500);
+      } else {
+        // Show final result after last tip or immediately if no tip
+        if (yes) {
+          setTimeout(showQuestion, 2500);
+        } else {
+          showQuestion();
+        }
+      }
+    }
+
+    showQuestion();
+  </script>
 </body>
 </html>
