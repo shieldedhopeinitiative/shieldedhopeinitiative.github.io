@@ -95,7 +95,31 @@ h4 {
       word-break: break-word;
     }
 
+.quiz {
+      margin-top: 2em;
+    }
 
+    .question {
+      font-size: 1.25em;
+      margin-bottom: 1.5em;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1em;
+      margin-bottom: 3em;
+    }
+
+    button {
+      font-size: 1em;
+      padding: 0.5em 1.5em;
+      cursor: pointer;
+    }
+
+    .result {
+      font-size: 1.125em;
+      margin-top: 2em;
+    }
   </style>
 </head>
 <body>
@@ -126,7 +150,61 @@ h4 {
     <p>We’re here to listen and assist.</p>
   </section>
 
+   
+
+  <section class="quiz">
+    <h2>Am I Being Controlled?</h2>
+    <p>This private, simple tool may help you recognize patterns of emotional abuse or coercive control. Nothing gets stored anywhere. Your responses are and will remain private to you.</p>
+    <p class="question" id="question"></p>
+    <div class="buttons">
+      <button onclick="answer(true)">Yes</button>
+      <button onclick="answer(false)">No</button>
+    </div>
+    <div class="result" id="result"></div>
+  </section>
+
   
+
+  <script>
+    const questions = [
+      "They read my texts, emails, or DMs without permission.",
+      "They demand to know who I talk to and where I go.",
+      "They control the money or make me ask for it.",
+      "I feel afraid to disagree with them.",
+      "They insult or criticize me, then say it's 'just a joke.'",
+      "They’ve isolated me from friends or family.",
+      "They say I can’t survive without them.",
+      "They threaten to hurt themselves if I leave.",
+      "I find myself constantly trying to keep the peace.",
+      "I’m not sure what’s real anymore after arguments."
+    ];
+
+    let index = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const resultEl = document.getElementById("result");
+
+    function showQuestion() {
+      if (index < questions.length) {
+        questionEl.textContent = questions[index];
+      } else {
+        questionEl.textContent = "";
+        document.querySelector(".buttons").style.display = "none";
+        resultEl.innerHTML = score > 3
+          ? "<strong>Your answers suggest patterns of control or emotional abuse. You are not alone. Support is available, and you deserve to feel safe.</strong>"
+          : "<strong>Even one 'yes' can be a sign of unhealthy control. Trust your feelings and reach out if something feels wrong.</strong>";
+      }
+    }
+
+    function answer(yes) {
+      if (yes) score++;
+      index++;
+      showQuestion();
+    }
+
+    showQuestion();
+  </script>
 
   <section>
     <h2>Government Helplines</h2>
