@@ -172,6 +172,9 @@ h4 {
       <button onclick="answer(false)">No</button>
     </div>
     <div class="tip" id="tip" style="display:none;"></div>
+  <div id="continue" style="display:none; margin-top: 1em;">
+  <button type="button" onclick="nextQuestion()">Continue</button>
+  </div>
     <div class="result" id="result"></div>
   </section>
 
@@ -493,28 +496,24 @@ h4 {
     }
 
     function answer(yes) {
-      if (yes) {
-        score++;
-        tipEl.textContent = tips[index];
-        tipEl.style.display = "block";
-      } else {
-        tipEl.style.display = "none";
-        tipEl.textContent = "";
+  if (yes) {
+    score++;
+    tipEl.textContent = tips[index];
+    tipEl.style.display = "block";
+    document.getElementById("continue").style.display = "block";
+    buttonsEl.style.display = "none";
+  } else {
+    index++;
+    showQuestion();
+  }
+}
+function nextQuestion() {
+  document.getElementById("continue").style.display = "none";
+  tipEl.style.display = "none";
+  tipEl.textContent = "";
+  index++;
+  showQuestion();
       }
-      index++;
-      if (index < questions.length) {
-        // Wait 2.5 seconds showing the tip before next question
-        setTimeout(showQuestion, 2500);
-      } else {
-        // Show final result after last tip or immediately if no tip
-        if (yes) {
-          setTimeout(showQuestion, 2500);
-        } else {
-          showQuestion();
-        }
-      }
-    }
-
     showQuestion();
   </script>
 </body>
